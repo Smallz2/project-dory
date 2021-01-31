@@ -11,6 +11,10 @@ class TeamsController < ApplicationController
   end
 
   def new
+    if !current_user.first_name.present?
+      redirect_to root_path, notice: "Please update your account information first"
+    end
+
     @team = Team.new
   end
 

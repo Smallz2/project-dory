@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dory</title>
+    <title>Project Dory</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +11,7 @@
 
   <% if current_user %>
     <body>
+      <%= toastr_flash %>
       <%= render 'shared/navtop' %>
       <main>
         <%= yield %>
