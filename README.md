@@ -17,7 +17,3 @@ Add Socials to account
 
 Add about me to account
 
-# Things to go
-Add avatar to account with google cloud
-
-Update UI
