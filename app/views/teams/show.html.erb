@@ -78,8 +78,8 @@
                         <img src="../assets/images/checked-mark.svg" alt="" height="30" width="30">
                       </a>
                     </div>
-                    <div class="ml-4">
-                      <h4 class="mb-0"><%= request.user_name %></h4>
+                    <div class="mb-3">
+                      <h4><%= link_to request.user_name, request.user %></h4>
                     </div>
                   </div>
                   <%= link_to "Accept", accept_request_path(request, user: current_user), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-primary" %>

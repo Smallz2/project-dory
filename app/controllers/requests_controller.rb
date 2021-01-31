@@ -3,11 +3,11 @@ class RequestsController < ApplicationController
 
   def create
     if !current_user.first_name.present?
-      redirect_to root_path, notice: "Please update your account information first" and return
-    else
-      Request.new(team_id: params[:team].to_i, user_id: current_user.id).save
-      redirect_to Team.find(params[:team].to_i), notice: "Request made" and return
+      redirect_to edit_user_url(current_user), notice: "Please update your account information first" and return
     end
+    
+    Request.new(team_id: params[:team].to_i, user_id: current_user.id).save
+    redirect_to Team.find(params[:team].to_i), notice: "Request made" and return
   end
 
   def accept
