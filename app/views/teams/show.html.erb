@@ -1,0 +1,95 @@
+<div class="bg-primary">
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="row py-5 align-items-center no-gutters">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+        <div class="py-5 py-lg-0">
+          <h1 class="text-white display-4 font-weight-semi-bold">
+            <%= @team.name %>
+          </h1>
+          <p class="text-white-50 mb-4 lead">
+            <%= @team.description %>
+          </p>
+
+          <% if team_lead?(@team) %>
+            <%= link_to "Update Team Information", edit_team_url, class: "btn btn-white" %>
+            <% if @team.empty? %>
+              <%= link_to "Destroy Team", @team, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="py-5">
+    <div class="">
+      <div class="row">
+        <div class="col-lg-8 col-md-12 col-12 mt-n8 mb-4 mb-lg-0">
+          <h3>Team Members (<%= @users.count + 1 %>) </h3>
+          <% if can_join_team?(@team) %>
+            <div class="btn-group mb-4">
+              <%= link_to "Join", request_path(team: @team), class: "btn btn-sm btn-primary", method: :patch %>
+            </div>
+          <% else %>
+            <p class="text-primary">You are in a team or a request to join a team is already in</p>
+          <% end %>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="">
+                  <h4 class="mb-0"><%= blank_to_human(@team.leader.full_name) %></h4>
+                  <p class='font-weight-semi-bold text-primary'>Team Lead</p>
+                </div>
+              </div>
+              <p class="text-truncate-line-2 text-muted"><%= blank_to_human(@team.leader.about) %></p>
+            </div>
+          </div>
+          <% @users.each do |user| %>
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <h4 class="mb-0"><%= blank_to_human(user.full_name) %></h4>
+                  </div>
+                </div>
+                <p class="text-truncate-line-2 text-muted"><%= blank_to_human(user.about) %></p>
+                <%= link_to "View full details", user, class: "btn btn-outline-primary btn-sm"  %>
+                <%= link_to "Kick", kick_team_path(@team, user_id: user.id), method: :patch, class: "btn btn-danger btn-sm" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <% if team_lead?(@team) %>
+          <div class="col-lg-4 col-md-12 col-12 mt-lg-n22">
+            <h4>Team Join Requests</h4>
+
+            <% @requests.each do |request| %>
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="position-relative">
+                      <img src="../assets/images/avatar-1.jpg" alt="" class="rounded-circle avatar-xl">
+                      <a href="#!" class="position-absolute mt-2 ml-n3" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verifed">
+                        <img src="../assets/images/checked-mark.svg" alt="" height="30" width="30">
+                      </a>
+                    </div>
+                    <div class="ml-4">
+                      <h4 class="mb-0"><%= request.user_name %></h4>
+                    </div>
+                  </div>
+                  <%= link_to "Accept", accept_request_path(request, user: current_user), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-primary" %>
+                  <%= link_to "Decline", "/requests/#{request.id}", method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+                </div>
+              </div> 
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dory</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <% if current_user %>
+    <body>
+      <%= render 'shared/navtop' %>
+      <main>
+        <%= yield %>
+      </main>
+      <%= render 'shared/footer' %>
+    </body>
+  <% else %>
+    <body class="text-center custom-body" data-new-gr-c-s-check-loaded="14.993.0" data-gr-ext-installed contenteditable="false">
+      <main class="form-signin">
+        <%= yield %>
+      </main>
+    </body>
+  <% end %>
+</html>
