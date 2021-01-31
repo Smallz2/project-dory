@@ -1,24 +1,19 @@
-# README
+# Project Dory
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hello, All 
 
-Things you may want to cover:
+I created a team building software to allow NSBEHacks participants to create, find and join teams.
 
-* Ruby version
+Framework: Ruby on Rails
 
-* System dependencies
+# Actions Allowed: 
+Creating, delete a Team
 
-* Configuration
+Accept team join request for team leader
 
-* Database creation
+Requesting to join a team
 
-* Database initialization
+Add Socials to account
 
-* How to run the test suite
+Add about me to account
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
